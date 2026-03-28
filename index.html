@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthGuide – Symptom Checker & Hospital Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+    <header>
+        <div class="logo">HealthGuide</div>
+        <p class="tagline">Describe your symptoms. Get insights. Find help nearby.</p>
+    </header>
+
+    <main>
+        <!-- STEP 1: Symptom Input -->
+        <section class="card" id="symptom-section">
+            <h2>Step 1: Enter Your Symptoms</h2>
+            <p class="hint">Click symptoms below to select them. Selected symptoms appear as tags.</p>
+
+            <div id="symptom-pills" class="pill-container"></div>
+
+            <div id="symptom-tags" class="tag-container"></div>
+
+            <div class="input-row" style="margin-top:1rem;">
+                <select id="age-group">
+                    <option value="">Select age group</option>
+                    <option value="child">Child (0–12)</option>
+                    <option value="teen">Teen (13–17)</option>
+                    <option value="adult">Adult (18–59)</option>
+                    <option value="senior">Senior (60+)</option>
+                </select>
+                <select id="gender">
+                    <option value="">Select gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <button id="diagnose-btn" class="primary-btn" disabled>Analyze Symptoms</button>
+            <div id="input-error" class="error-msg"></div>
+        </section>
+
+        <!-- STEP 2: Diagnosis Results -->
+        <section class="card hidden" id="diagnosis-section">
+            <h2>Step 2: Possible Conditions</h2>
+            <div id="diagnosis-loading" class="loader hidden"></div>
+            <div id="diagnosis-results"></div>
+            <button id="find-hospitals-btn" class="primary-btn hidden">Find Nearest Hospitals</button>
+        </section>
+
+        <!-- STEP 3: Hospital Finder -->
+        <section class="card hidden" id="hospital-section">
+            <h2>Step 3: Nearby Hospitals</h2>
+            <p class="hint" id="location-status">Requesting your location...</p>
+            <div id="map"></div>
+            <div id="hospital-loading" class="loader hidden"></div>
+            <div id="hospital-list"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>Disclaimer:</strong> HealthGuide is for informational purposes only and does not replace professional medical advice.</p>
+        <p>Diagnosis data via <a href="https://api.fda.gov" target="_blank">Open FDA</a> · Hospitals via <a href="https://overpass-api.de" target="_blank">OpenStreetMap Overpass</a> · Maps by <a href="https://leafletjs.com" target="_blank">Leaflet</a></p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
