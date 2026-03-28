@@ -79,7 +79,13 @@ function renderTags() {
     symptoms.forEach(sym => {
         const tag = document.createElement('div');
         tag.className = 'tag';
-        tag.innerHTML = `${sym} <button onclick="removeSymptom('${sym}')" title="Remove">×</button>`;
+        const text = document.createTextNode(sym + ' ');
+        const btn = document.createElement('button');
+        btn.textContent = '×';
+        btn.title = 'Remove';
+        btn.addEventListener('click', () => removeSymptom(sym));
+        tag.appendChild(text);
+        tag.appendChild(btn);
         symptomTags.appendChild(tag);
     });
 }
@@ -293,33 +299,77 @@ function localDiagnosis(userSymptoms) {
 }
 
 function renderDiagnosis(results) {
+    diagnosisResults.innerHTML = '';
+    
     if (results.length === 0) {
-        diagnosisResults.innerHTML = `
-            <p style="color:var(--muted); text-align:center; padding:1rem;">
-                No matching conditions found for the entered symptoms.<br>
-                Please consult a healthcare professional for a proper evaluation.
-            </p>`;
+        const p = document.createElement('p');
+        p.style.cssText = 'color:var(--muted); text-align:center; padding:1rem;';
+        p.textContent = 'No matching conditions found for the entered symptoms. Please consult a healthcare professional for a proper evaluation.';
+        diagnosisResults.appendChild(p);
         return;
     }
 
     const age = ageGroup.value;
     const gen = gender.value;
-    const context = (age || gen) ? `<p class="hint" style="margin-bottom:1rem;">Profile: ${[age, gen].filter(Boolean).join(', ')}</p>` : '';
+    if (age || gen) {
+        const contextP = document.createElement('p');
+        contextP.className = 'hint';
+        contextP.style.marginBottom = '1rem';
+        contextP.textContent = 'Profile: ' + [age, gen].filter(Boolean).join(', ');
+        diagnosisResults.appendChild(contextP);
+    }
 
-    diagnosisResults.innerHTML = context + results.map(c => `
-        <div class="condition-card">
-            <div class="condition-header">
-                <span class="condition-name">${c.name}</span>
-                <span class="severity-badge severity-${c.severity}">${c.severity.toUpperCase()} SEVERITY</span>
-            </div>
-            <p class="condition-desc">${c.description}</p>
-            ${c.fdaInfo ? `<p class="condition-desc" style="margin-top:0.4rem; border-left:3px solid var(--accent); padding-left:0.6rem;"><strong>FDA Drug Info:</strong> ${c.fdaInfo}</p>` : ''}
-            <p class="condition-desc" style="margin-top:0.4rem;">
-                <strong>Matched symptoms:</strong> ${c.matchedSymptoms.join(', ')}
-            </p>
-            <p class="condition-action">→ ${c.action}</p>
-        </div>
-    `).join('');
+    results.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'condition-card';
+        
+        const header = document.createElement('div');
+        header.className = 'condition-header';
+        
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'condition-name';
+        nameSpan.textContent = c.name;
+        
+        const severitySpan = document.createElement('span');
+        severitySpan.className = `severity-badge severity-${c.severity}`;
+        severitySpan.textContent = c.severity.toUpperCase() + ' SEVERITY';
+        
+        header.appendChild(nameSpan);
+        header.appendChild(severitySpan);
+        card.appendChild(header);
+        
+        const descP = document.createElement('p');
+        descP.className = 'condition-desc';
+        descP.textContent = c.description;
+        card.appendChild(descP);
+        
+        if (c.fdaInfo) {
+            const fdaP = document.createElement('p');
+            fdaP.className = 'condition-desc';
+            fdaP.style.cssText = 'margin-top:0.4rem; border-left:3px solid var(--accent); padding-left:0.6rem;';
+            const strong = document.createElement('strong');
+            strong.textContent = 'FDA Drug Info: ';
+            fdaP.appendChild(strong);
+            fdaP.appendChild(document.createTextNode(c.fdaInfo));
+            card.appendChild(fdaP);
+        }
+        
+        const symptomsP = document.createElement('p');
+        symptomsP.className = 'condition-desc';
+        symptomsP.style.marginTop = '0.4rem';
+        const symptomsStrong = document.createElement('strong');
+        symptomsStrong.textContent = 'Matched symptoms: ';
+        symptomsP.appendChild(symptomsStrong);
+        symptomsP.appendChild(document.createTextNode(c.matchedSymptoms.join(', ')));
+        card.appendChild(symptomsP);
+        
+        const actionP = document.createElement('p');
+        actionP.className = 'condition-action';
+        actionP.textContent = '→ ' + c.action;
+        card.appendChild(actionP);
+        
+        diagnosisResults.appendChild(card);
+    });
 }
 
 // ─── HOSPITAL FINDER ──────────────────────────────────────────────────────────
@@ -432,18 +482,45 @@ function renderHospitals(hospitals) {
             radius: 9, fillColor: colors[i % colors.length],
             color: '#fff', weight: 2, fillOpacity: 0.9
         }).addTo(map);
-        marker.bindPopup(`<strong>${h.name}</strong><br>${h.dist.toFixed(2)} km away`);
+        
+        const popupDiv = document.createElement('div');
+        const popupStrong = document.createElement('strong');
+        popupStrong.textContent = h.name;
+        popupDiv.appendChild(popupStrong);
+        popupDiv.appendChild(document.createElement('br'));
+        popupDiv.appendChild(document.createTextNode(h.dist.toFixed(2) + ' km away'));
+        marker.bindPopup(popupDiv);
 
         const item = document.createElement('div');
         item.className = 'hospital-item';
-        item.innerHTML = `
-            <div>
-                <div class="hospital-name">${h.name}</div>
-                <div class="hospital-meta">${h.address}${h.phone ? ' · ' + h.phone : ''}</div>
-                <a class="directions-btn" href="https://www.openstreetmap.org/directions?from=${userLat},${userLon}&to=${h.lat},${h.lon}" target="_blank">Get Directions</a>
-            </div>
-            <div class="hospital-dist">${h.dist.toFixed(2)} km</div>
-        `;
+        
+        const leftDiv = document.createElement('div');
+        
+        const nameDiv = document.createElement('div');
+        nameDiv.className = 'hospital-name';
+        nameDiv.textContent = h.name;
+        
+        const metaDiv = document.createElement('div');
+        metaDiv.className = 'hospital-meta';
+        metaDiv.textContent = h.address + (h.phone ? ' · ' + h.phone : '');
+        
+        const directionsLink = document.createElement('a');
+        directionsLink.className = 'directions-btn';
+        directionsLink.href = `https://www.openstreetmap.org/directions?from=${userLat},${userLon}&to=${h.lat},${h.lon}`;
+        directionsLink.target = '_blank';
+        directionsLink.rel = 'noopener noreferrer';
+        directionsLink.textContent = 'Get Directions';
+        
+        leftDiv.appendChild(nameDiv);
+        leftDiv.appendChild(metaDiv);
+        leftDiv.appendChild(directionsLink);
+        
+        const distDiv = document.createElement('div');
+        distDiv.className = 'hospital-dist';
+        distDiv.textContent = h.dist.toFixed(2) + ' km';
+        
+        item.appendChild(leftDiv);
+        item.appendChild(distDiv);
         item.addEventListener('click', () => { map.setView([h.lat, h.lon], 16); marker.openPopup(); });
         hospitalList.appendChild(item);
     });
