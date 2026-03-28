@@ -1,7 +1,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-    --primary: #0077b6;
+    --primary: #62b1dc;
     --primary-dark: #005f8e;
     --accent: #00b4d8;
     --bg: #f0f4f8;
@@ -318,7 +318,7 @@ button:active { transform: scale(0.97); }
 footer {
     text-align: center;
     padding: 1.5rem 1rem;
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: var(--muted);
     line-height: 1.8;
 }
