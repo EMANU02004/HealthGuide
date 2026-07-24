@@ -5,7 +5,7 @@
 
 A web application that allows users to check their symptoms, get possible diagnoses, and find nearby hospitals on an interactive map.
 
-**Live Demo:** http://44.210.131.42
+**Live Demo:** 
 
 ---
 
