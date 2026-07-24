@@ -31,10 +31,10 @@ const COMMON_SYMPTOMS = [
     'Runny nose', 'Sneezing', 'Shortness of breath', 'Chest pain',
     'Nausea', 'Vomiting', 'Diarrhea', 'Stomach cramps', 'Loss of appetite',
     'Muscle aches', 'Joint pain', 'Dizziness', 'Blurred vision', 'Rash',
-    'Itching', 'Swelling', 'Pale skin', 'Weakness', 'Weight loss',
-    'Frequent urination', 'Excessive thirst', 'Numbness', 'Wheezing',
+    'Itching', 'Swelling', 'Pale skin', 'Sleeping problems', 'Weakness', 'Weight loss',
+    'Frequent urination', 'Numbness', 'Wheezing', 'Rapid heartbeat',
     'Chest tightness', 'Back pain', 'Pelvic pain', 'Loss of taste',
-    'Loss of smell', 'Confusion', 'Rapid heartbeat', 'Cold sweat', 'Sweating'
+    'Loss of smell', 'Confusion', 'Cold sweat', 'Sweating'
 ];
 
 const pillContainer = document.getElementById('symptom-pills');
