@@ -139,8 +139,7 @@ async function fetchDiagnosis(symptomList) {
 }
 
 // ─── LOCAL DIAGNOSIS ENGINE ───────────────────────────────────────────────────
-// A curated symptom→condition map. Each condition lists matching symptoms,
-// severity, description, and recommended action.
+// A curated symptom→condition map. Each condition lists matching symptoms
 const CONDITIONS = [
     {
         name: 'Common Cold',
