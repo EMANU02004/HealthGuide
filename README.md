@@ -7,8 +7,6 @@ A web application that allows users to check their symptoms, get possible diagno
 
 **Live Demo:** http://44.210.131.42
 
-**Video Demo:** https://youtu.be/qUVWy-cId3o
-
 ---
 
 ## Overview
