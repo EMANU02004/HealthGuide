@@ -7,6 +7,10 @@ A web application that allows users to check their symptoms, get possible diagno
 
 **Live Demo:** 
 
+- **Lb01** ([44.210.131.42](http://44.210.131.42))
+- **Web01** ([18.233.158.107](http://18.233.158.107))
+- **Web02** ([44.201.84.254](http://44.201.84.254))
+
 ---
 
 ## Overview
