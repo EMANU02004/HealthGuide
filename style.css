@@ -24,7 +24,6 @@ body {
     flex-direction: column;
 }
 
-/* HEADER */
 header {
     background: linear-gradient(135deg, var(--primary), var(--accent));
     color: white;
