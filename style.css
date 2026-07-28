@@ -332,3 +332,4 @@ footer a:hover { text-decoration: underline; }
     .condition-header { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
     .hospital-item { flex-direction: column; }
 }
+
