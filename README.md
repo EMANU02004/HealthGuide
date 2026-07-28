@@ -244,3 +244,4 @@ HealthGuide/
 >
 > Hospital locations are sourced from OpenStreetMap and may be incomplete or
 > out of date. Verify a facility's hours and services before travelling to it.
+
