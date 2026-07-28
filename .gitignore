@@ -1,0 +1,25 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sensitive info
+.env
+*.env
+*.key
+*.pem
+secrets.js
+config.js
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies (if you ever add them)
+node_modules/
+
