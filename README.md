@@ -67,7 +67,7 @@ HealthGuide helps users:
 
 ---
 
-## Architecture
+## Architecture 
 
 ```
 User Browser
