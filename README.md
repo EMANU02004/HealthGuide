@@ -102,6 +102,11 @@ FDA API + Overpass API
 
 ## Deployment
 
+### Servers
+- Web01: 18.233.158.107
+- Web02: 44.201.84.254
+- Load Balancer: 44.210.131.42
+
 ### Step 1 – Deploy to Web Servers (Web01 & Web02)
 
 Run on both servers:
