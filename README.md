@@ -9,8 +9,6 @@ A web application that allows users to check their symptoms, get possible diagno
 
 ## Demo
 
-[![Watch Demo Video](https://img.youtube.com/vi/AQZRfPhG4Z4/0.jpg)](https://youtu.be/AQZRfPhG4Z4)
-
 
 - **Lb01** ([44.210.131.42](http://44.210.131.42))
 - **Web01** ([18.233.158.107](http://18.233.158.107))
